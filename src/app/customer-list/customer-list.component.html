@@ -1,0 +1,40 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:left">
+  <h1> {{ title }}</h1>
+</div>
+
+<div (click)="toggle()" [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
+  <p>The box is now {{ isOpen ? 'Open' : 'Closed' }}!</p>
+</div>
+
+<filtered-customer (changed)="filterMe($event)"></filtered-customer>
+
+  <table class="table table-hover">
+    <thead>
+      <td> Name</td>
+      <td>City</td>
+      <td>Order Total</td>
+    </thead>
+    <tbody>
+    <tr *ngFor="let cust of filteredCustList">
+      <td>
+        <a [routerLink]="['/orders', cust.id]">
+          {{ cust.firstName | titlecase}} {{ cust.lastName }}
+        </a>
+      </td>
+      <td>{{cust.city}}</td>
+      <td>{{cust.orderTotal | currency:currencyCode:'code' }} </td>
+    </tr>
+    <tr *ngIf="filteredCustList && filteredCustList.length">
+      <td colspan="3" style="text-align: right">{{ customersOrderTotal | currency:currencyCode:'code' }}</td>
+    </tr>
+    <tr>
+      <td colspan="3" *ngIf="!filteredCustList || !filteredCustList.length">No customer found</td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: right" *ngIf="filteredCustList && filteredCustList.length">
+            Number of Customers: {{filteredCustList.length}}
+        </td>
+      </tr>
+  </tbody>
+  </table>
