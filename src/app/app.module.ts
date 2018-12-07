@@ -26,4 +26,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
   providers: [ CustomerService ],
   bootstrap: [AppComponent] 
 })
-export class AppModule { }
+
+export class AppModule 
+{ 
+  
+}
